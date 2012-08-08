@@ -1,6 +1,8 @@
 Status: Very Beta - Working on getting the POC code out and moving the view and collections into a plug. Currently the code 
 sites in require.js module.
 
+[![Build Status](https://secure.travis-ci.org/d1b1/userize.png?branch=master)](http://travis-ci.org/d1b1/userize)
+
 ### Beta project to build a public for Backbone.js to provide a display and edit widget for the Google GeoCoder API.
 
 This project and the initial code is a spin off of feature built into the formagg.io document editor. The objective is to 
