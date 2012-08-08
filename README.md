@@ -12,8 +12,8 @@ settings and bb templates.
 
 ## Related Projects
 
-JQuery GeoCoder Plugin - https://github.com/ubilabs/geocomplete
-Grunt.js - https://github.com/cowboy/grunt
-Backbone.LayoutManager - https://github.com/tbranyen/backbone.layoutmanager
-Grunt Backbone - https://github.com/backbone-boilerplate/grunt-bbb
+* JQuery GeoCoder Plugin - https://github.com/ubilabs/geocomplete
+* Grunt.js - https://github.com/cowboy/grunt
+* Backbone.LayoutManager - https://github.com/tbranyen/backbone.layoutmanager
+* Grunt Backbone - https://github.com/backbone-boilerplate/grunt-bbb
 
