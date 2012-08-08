@@ -4,29 +4,29 @@
     <meta charset="utf-8">
     <title>Backbone.js GeoCoder Plugin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Backbone.js beta plugin that provides a display and edit widget for backbone.js views and geolocations.">
+    <meta name="author" content="d1b1 - Stephan Smith">
 
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     
     <!-- Le styles -->
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <style>
+
+    <style type="text/css">
+    
       body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        padding-top: 60px;
+        padding-bottom: 40px;
       }
+
+      .loc { 
+        padding: 5px;
+        border:1px solid #EFEFEF; 
+        float: left; margin: 10px;
+      }
+      .loc input { width: 300px; }
     </style>
-
-  <style>
-
-  .loc { 
-    padding: 5px;
-    border:1px solid #EFEFEF; 
-    float: left; margin: 10px;
-  }
-  .loc input { width: 300px; }
-  </style>
 
     <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -36,7 +36,7 @@
     <![endif]-->
 
     <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="shortcut icon" href="/bootstrap/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/bootstrap/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/bootstrap/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/bootstrap/ico/apple-touch-icon-72-precomposed.png">
@@ -76,12 +76,15 @@
       </div>
 
       <div class="row">
-        <div class="span12" role="main" id="main"></div>
+
+        <div class="span12" role="main" id="main">
+        </div>
+
       </div>
 
       <hr>
       <footer>
-        <img src="https://secure.travis-ci.org/d1b1/backbone.geocoder.plugin.png?branch=master">
+        &copy; 2012 - d1b1 <img src="https://secure.travis-ci.org/d1b1/backbone.geocoder.plugin.png?branch=master">
       </footer>
 
     </div> <!-- /container -->
