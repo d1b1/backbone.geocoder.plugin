@@ -12,7 +12,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser());
 
-  app.use(express.static( __dirname + '/' ));
+  app.use(express.static( __dirname + '/public/' ));
 });
 
 var port = process.env.PORT || 4200;
