@@ -17,5 +17,5 @@ app.configure(function(){
 
 var port = process.env.PORT || 4200;
 app.listen(port, function() { 
-  console.log("StartUp: Userize " + port ); 
+  console.log("StartUp: backbone.js-geocoder-plugin " + port ); 
 });
