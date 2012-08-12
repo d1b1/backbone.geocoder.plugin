@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 
     // The clean task ensures all files are removed from the dist/ directory so
     // that no files linger from previous builds.
-    clean: ["dist/"],
+    clean: ["public/dist"],
 
     // The lint task will run the build configuration and the application
     // JavaScript through JSHint and report any errors.  You can change the
@@ -47,10 +47,10 @@ module.exports = function(grunt) {
     // dist/debug/require.js, because we want to only load one script file in
     // index.html.
     concat: {
-      "dist/debug/require.js": [
-        "assets/js/libs/almond.js",
-        "dist/debug/templates.js",
-        "dist/debug/require.js"
+      "public/dist/debug/require.js": [
+        "public/assets/js/libs/almond.js",
+        "public/dist/debug/templates.js",
+        "public/dist/debug/require.js"
       ]
     },
 
@@ -59,16 +59,16 @@ module.exports = function(grunt) {
     // also minifies all the CSS as well.  This is named index.css, because we
     // only want to load one stylesheet in index.html.
     mincss: {
-      "dist/release/index.css": [
-        "assets/css/h5bp.css",
-        "assets/css/style.css"
+      "public/dist/release/index.css": [
+        "public/bootstrap/css/bootstrap.css",
+        "public/bootstrap/css/bootstrap-responsive.css"
       ]
     },
 
     // Takes the built require.js file and minifies it for filesize benefits.
     min: {
-      "dist/release/require.js": [
-        "dist/debug/require.js"
+      "public/dist/release/require.js": [
+        "public/dist/debug/require.js"
       ]
     },
 
@@ -117,23 +117,25 @@ module.exports = function(grunt) {
     // future other builders may be contributed as drop-in alternatives.
     requirejs: {
       // Include the main configuration file
-      mainConfigFile: "app/config.js",
+      mainConfigFile: "public/app/config.js",
 
-      // Output file
-      //out: "dist/debug/require.js",
-      dir: "app",
+      // Output file.
+      out: "public/dist/debug/require.js",
+
+      appDir: "public/dist/",
 
       // Root application module
       name: "config",
 
       // Do not wrap everything in an IIFE
-      wrap: false
+      wrap: false,   
     }
 
   });
 
   grunt.loadNpmTasks('grunt-contrib');
-//  grunt.loadNpmTasks('grunt-clean');
+
+  grunt.loadNpmTasks('grunt-requirejs');
 
   // The default task will remove all contents inside the dist/ folder, lint
   // all your code, precompile all the underscore templates into
