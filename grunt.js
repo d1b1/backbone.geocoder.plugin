@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 
     // The clean task ensures all files are removed from the dist/ directory so
     // that no files linger from previous builds.
-    clean: ["public/dist"],
+    clean: ["public/dist/debug/*"],
 
     // The lint task will run the build configuration and the application
     // JavaScript through JSHint and report any errors.  You can change the
@@ -47,7 +47,7 @@ module.exports = function(grunt) {
     // dist/debug/require.js, because we want to only load one script file in
     // index.html.
     concat: {
-      "public/dist/debug/require.js": [
+      "public/dist/release/require.js": [
         "public/assets/js/libs/almond.js",
         "public/dist/debug/templates.js",
         "public/dist/debug/require.js"
@@ -113,22 +113,26 @@ module.exports = function(grunt) {
       }
     },
 
+    // requirejs: {
+    //   mainConfigFile: "public/app/config.js",
+
+    //   out: "pubic/dist/debug/require.js",
+
+    //   name: "config",
+
+    //   wrap: false
+    // },
+
     // This task uses James Burke's excellent r.js AMD build tool.  In the
     // future other builders may be contributed as drop-in alternatives.
     requirejs: {
-      // Include the main configuration file
-      mainConfigFile: "public/app/config.js",
+ 
+      baseUrl: "public",
+      mainConfigFile: "public/app/main.js",
+      out: "pubic/dist/optimized.js",
+      name: "app"
 
-      // Output file.
-      out: "public/dist/debug/require.js",
 
-      appDir: "public/dist/",
-
-      // Root application module
-      name: "config",
-
-      // Do not wrap everything in an IIFE
-      wrap: false,   
     }
 
   });
@@ -150,6 +154,6 @@ module.exports = function(grunt) {
 
   // The release task will run the debug tasks and then minify the
   // dist/debug/require.js file and CSS files.
-  grunt.registerTask("release", "default min mincss");
+  grunt.registerTask("release", "default"); //min mincss
 
 };
