@@ -25,9 +25,9 @@ require.config({
     // Backbone.LayoutManager depends on Backbone.
     "plugins/backbone.layoutmanager": ["backbone"],
 
-    "plugins/jquery.geocomplete": ["backbone"],
+    "plugins/jquery.geocomplete": ["backbone"]
 
-    "plugins/jquery.geocomplete": ["jquery"]
+//    "plugins/jquery.geocomplete": ["jquery"]
   }
 
 });

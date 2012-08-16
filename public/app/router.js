@@ -8,8 +8,6 @@ define([
 ],
 
 function(app, Example, Edit) {
-
-  alert('in the router.js');
   
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({

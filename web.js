@@ -16,10 +16,8 @@ app.configure(function(){
 app.configure('production', function() {
   console.log('Note: release');
 
-  // Setup the Require.js
+  // Paths & Files
   app.use('/assets/js/libs/', express.static(__dirname + '/public/dist/release/'));
-
-  // Setup the CSS file.
   app.use('/assets/css/', express.static(__dirname + '/public/dist/release/'));
 });
 

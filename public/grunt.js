@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 
     // The clean task ensures all files are removed from the dist/ directory so
     // that no files linger from previous builds.
-    clean: ["public/dist/debug/*"],
+    clean: ["dist/"],
 
     // The lint task will run the build configuration and the application
     // JavaScript through JSHint and report any errors.  You can change the
@@ -37,8 +37,8 @@ module.exports = function(grunt) {
     // The concat task depends on this file to exist, so if you decide to
     // remove this, ensure concat is updated accordingly.
     jst: {
-      "public/dist/debug/templates.js": [
-        "public/app/templates/**/*.html"
+      "dist/debug/templates.js": [
+        "app/templates/**/*.html"
       ]
     },
 
@@ -47,11 +47,17 @@ module.exports = function(grunt) {
     // dist/debug/require.js, because we want to only load one script file in
     // index.html.
     concat: {
-      "public/dist/release/require.js": [
-        "public/assets/js/libs/almond.js",
-        "public/dist/debug/templates.js",
-        "public/dist/debug/require.js"
-      ]
+      dist: {
+        src: [
+          "assets/js/libs/almond.js",
+          "dist/debug/templates.js",
+          "dist/debug/require.js"
+        ],
+
+        dest: "dist/debug/require.js",
+
+        separator: ";"
+      }
     },
 
     // This task uses the MinCSS Node.js project to take all your CSS files in
@@ -59,16 +65,16 @@ module.exports = function(grunt) {
     // also minifies all the CSS as well.  This is named index.css, because we
     // only want to load one stylesheet in index.html.
     mincss: {
-      "public/dist/release/index.css": [
-        "public/bootstrap/css/bootstrap.css",
-        "public/bootstrap/css/bootstrap-responsive.css"
+      "dist/release/index.css": [
+        "bootstrap/css/bootstrap.css",
+        "bootstrap/css/bootstrap-responsive.css"
       ]
     },
 
     // Takes the built require.js file and minifies it for filesize benefits.
     min: {
-      "public/dist/release/require.js": [
-        "public/dist/debug/require.js"
+      "dist/release/require.js": [
+        "dist/debug/require.js"
       ]
     },
 
@@ -103,7 +109,7 @@ module.exports = function(grunt) {
         host: "0.0.0.0",
         port: process.env.PORT || 8000,
 
-        files: { "favicon.ico": "favicon.ico" },
+        //files: { "favicon.ico": "favicon.ico" },
 
         folders: {
           "app": "dist/release",
@@ -117,19 +123,16 @@ module.exports = function(grunt) {
     // future other builders may be contributed as drop-in alternatives.
     requirejs: {
      // Include the main configuration file.
-      mainConfigFile: "public/app/config.js",
+      mainConfigFile: "app/config.js",
 
       // Output file.
-      out: "public/dist/debug/require.js",
+      out: "dist/debug/require.js",
 
       // Root application module.
       name: "config",
 
       // Do not wrap everything in an IIFE.
       wrap: false
- 
-      // baseUrl: "public",
-
 
     }
 
@@ -139,19 +142,16 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-requirejs');
 
-  // The default task will remove all contents inside the dist/ folder, lint
+  // The debug task will remove all contents inside the dist/ folder, lint
   // all your code, precompile all the underscore templates into
   // dist/debug/templates.js, compile all the application code into
   // dist/debug/require.js, and then concatenate the require/define shim
   // almond.js and dist/debug/templates.js into the require.js file.
-  grunt.registerTask("default", "clean jst requirejs concat");
-
-  // The debug task is simply an alias to default to remain consistent with
-  // debug/release.
-  grunt.registerTask("debug", "default");
+  grunt.registerTask("debug", "clean jst requirejs concat");
 
   // The release task will run the debug tasks and then minify the
   // dist/debug/require.js file and CSS files.
-  grunt.registerTask("release", "default"); //min mincss
+  grunt.registerTask("release", "debug min mincss");
+
 
 };
