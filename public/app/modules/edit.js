@@ -30,69 +30,6 @@ function(app) {
     model: Edit.LocationModel
   });
 
-  Edit.Views.EditLocationItem = Backbone.View.extend({
-    template: "location", 
-    manage: true,
-    className: 'loc',
-
-    // Provide data to the template
-    serialize: function() {
-      return {
-        i: this.model.get('i'),
-        location: this.model.get('location')
-      };
-    },
-
-    afterRender: function() {
-      // Run the geocoding plugin after render.
-
-      $(".location_" + this.model.get('i')).geocomplete({
-        map: ".map_canvas_" + this.model.get('i'),
-        location: this.model.get('location'),
-        markerOptions: {
-          draggable: true
-        }
-      });
-
-    }
-  });
-
-  // This will fetch the tutorial template and render it.
-  Edit.Views.Form = Backbone.View.extend({
-    template: "editform",
-
-    manage: true,
-
-    initialize: function() {
-
-       // This will attach a collection to the model view.
-       this.collection = new Edit.LocationCollection( this.model.get('locations') );
-    },
-
-    // Provide data to the template
-    serialize: function() {
-       return this.model.toJSON();
-    },
-
-    // Need to move this into a view function that will
-    // map the collection data to a collection.
-    
-    beforeRender: function() {
-      var that = this;
-
-      var i = 0;
-      _.each(this.collection.models, function(location) {
-        i += 1;
-        location.set({ i: i});
-        that.insertView(".map_canvas_list", 
-          new Edit.Views.EditLocationItem( { model: location } )
-        );
-      });
-
-    }
-
-  });
-
   // ---------------------------------------
   // ---------------------------------------
 
@@ -127,7 +64,6 @@ function(app) {
   });
 
   Edit.Views.LocationItem = Backbone.View.extend({
-
     template: "location/item", 
 
     manage: true,
@@ -139,7 +75,14 @@ function(app) {
     },
 
     removeLocation: function(ev) {
+      // Remove the model from the colletion.
+      this.model.collection.remove(this.model); 
+
+      // Remove the view.
       this.remove();
+
+      // TODO - Refactor to have the view removed when the collection 
+      // model is removed.
     },
 
     // Provide data to the template
@@ -172,7 +115,11 @@ function(app) {
     },
 
     addLocation: function(ev) {
+
+      // Adding a new model to the collection. The add bind
+      // for the colletion will trigger the render.
       this.collection.add( new Edit.LocationModel() );
+
     },
 
     initialize: function(options, b) {
@@ -186,11 +133,10 @@ function(app) {
 
     renderLocation: function(newModel) {
 
-      this.insertView(".location_areas", 
-        new Edit.Views.LocationItem( { model: newModel } )
-      );
+      this.insertView(".location_areas2", 
+       new Edit.Views.LocationItem( { model: newModel } )
+      ).render();
 
-      this.render();
     },
 
     // Provide data to the template

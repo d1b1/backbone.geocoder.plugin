@@ -128,15 +128,11 @@ module.exports = function(grunt) {
       // Do not wrap everything in an IIFE.
       wrap: false
  
-      // baseUrl: "public",
-
-
     }
 
   });
 
   grunt.loadNpmTasks('grunt-contrib');
-
   grunt.loadNpmTasks('grunt-requirejs');
 
   // The default task will remove all contents inside the dist/ folder, lint
