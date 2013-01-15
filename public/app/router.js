@@ -39,9 +39,10 @@ function(app, Example, Edit) {
       var TestDocument = new Edit.Model(
        { 'Name': 'My First Document',
          'locations' : [
-           { location: '113 Atlantic Ave, Corpus Christ, TX'},
-           { location: 'Berlin Germany'},
-           { location: 'Paris France' },
+           { location: '113 Atlantic Ave, Corpus Christ, TX'}
+           // ,
+           // { location: 'Berlin Germany'},
+           // { location: 'Paris France' },
          ]
        }
       );

@@ -94,13 +94,79 @@ function(app) {
     },
 
     afterRender: function() {
-      $(this.el).find(".location").geocomplete({
+
+     var testData = {
+             "address_components":[
+                { "long_name":"113",
+                  "short_name":"113",
+                  "types":["street_number"]
+                },
+                { "long_name":"Atlantic Street",
+                  "short_name":"Atlantic St",
+                  "types":["route"]
+                },
+                { "long_name":"Bay Area",
+                  "short_name":"Bay Area",
+                  "types":["neighborhood","political"]
+                },
+                { "long_name":"Corpus Christi",
+                  "short_name":"Corpus Christi",
+                  "types":["locality","political"]
+                },
+                { "long_name":"Corpus Christi",
+                  "short_name":"Corpus Christi",
+                  "types":["administrative_area_level_3","political"]
+                },
+                { "long_name":"Nueces",
+                  "short_name":"Nueces",
+                  "types":["administrative_area_level_2","political"]
+                },
+                { "long_name":"Texas",
+                  "short_name":"TX",
+                  "types":["administrative_area_level_1","political"]
+                },
+                { "long_name":"United States",
+                  "short_name":"US",
+                  "types":["country","political"]
+                },
+                { "long_name":"78404",
+                  "short_name":"78404",
+                  "types":["postal_code"]
+                }
+              ],
+              "formatted_address":"113 Atlantic Street, Corpus Christi, TX 78404, USA",
+              "geometry": {
+                "location":{
+                  "Ya":27.7719958, "Za":-97.39126220000003
+                },
+                "location_type":"ROOFTOP",
+                "viewport":{
+                  "Z":{ "b": 27.7706468197085, "d": 27.7733447802915 },
+                  "ca":{ "b": -97.39261118029151, "d": -97.38991321970849 }
+                }
+              },
+              "partial_match":true,
+              "types":["street_address"]
+            }
+
+
+      $(this.el).find("#find").click(function(){
+        $("#location").trigger("geocode");
+      });
+
+      $(this.el).find("#location").geocomplete({
+        initData: testData,
         map: $(this.el).find(".map_canvas"),
         location: $(this.el).find(".location").val(),
         markerOptions: {
           draggable: true
-        }
+        },
+        types: ["geocode", "establishment"],
+        details: "#myform",
+        detailsAttribute: "name"
       });
+
+      $("#location").trigger("geocode");
     }
   });
 

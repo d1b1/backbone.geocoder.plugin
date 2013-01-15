@@ -166,6 +166,7 @@
       this.$input.bind("geocode", $.proxy(function(){
         this.find();
       }, this));
+
     },
 
     // Prepare a given DOM structure to be populated when we got some data.
@@ -201,6 +202,13 @@
 
       var location = this.options.location, latLng;
 
+      // Lets see if we can add the data during setup.
+      // And call inject the data into the form.
+      if (this.options.initData) {
+        this.fillDetails( this.options.initData );
+        return;
+      }
+
       if (!location) { return; }
 
       if (typeof location == 'string') {
@@ -219,6 +227,7 @@
       if (latLng){
         this.geocode({ latLng: latLng });
       }
+
     },
 
     // Look up a given address. If no `address` was specified it uses
@@ -253,6 +262,8 @@
     handleGeocode: function(results, status){
       if (status === google.maps.GeocoderStatus.OK) {
         var result = results[0];
+        console.log('the results', JSON.stringify(result));
+
         this.$input.val(result.formatted_address);
         this.update(result);
 
@@ -311,6 +322,8 @@
     // component type.
     fillDetails: function(result){
 
+      console.log('ddddddd in the fillDetails', result.geometry);
+
       var data = {},
         geometry = result.geometry,
         viewport = geometry.viewport,
@@ -331,13 +344,15 @@
       // Add infos about the address and geometry.
       $.extend(data, {
         formatted_address: result.formatted_address,
-        location_type: geometry.location_type || "PLACES",
-        viewport: viewport,
-        bounds: bounds,
-        location: geometry.location,
-        lat: geometry.location.lat(),
-        lng: geometry.location.lng()
+        //location_type: geometry.location_type || "PLACES",
+        //viewport: viewport,
+        //bounds: bounds,
+        //location: geometry.location,
+        //lat: geometry.location.lat(),
+        //lng: geometry.location.lng()
       });
+
+      console.log('the data', data, this.details)
 
       // Set the values for all details.
       $.each(this.details, $.proxy(function(key, $detail){
@@ -359,11 +374,24 @@
         value = value.toUrlValue();
       }
 
-      if ($element.is(":input")){
-        $element.val(value);
-      } else {
-        $element.text(value);
+      var formel = $element.selector;
+
+      if (formel=='#myform [name=route]') {
+        console.log(formel, value, $('input[name=route]') );
       }
+
+      // if ($element.is(":input")){
+      //   $element.val(value);
+      // } else {
+      //   $element.text(value);
+      // }
+
+      //if ($(formel).is(":input")){
+        $(formel).val(value);
+      //} else {
+      //  $(formel).text(value)
+      //}
+
     },
 
     // Fire the "geocode:dragged" event and pass the new position.

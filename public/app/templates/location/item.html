@@ -1,6 +1,50 @@
-<input type="text" size="50" placeholder="Type in an address" class="location" value="<%= location %>">
-<br><br>
+<form id="myform">
+<input type="text" size="50" placeholder="Type in an address" id="location" value="<%= location %>">
 
-<div style="width: 300px; height: 200px; background-color: #EFEFEF" class="map_canvas"></div>
 <br>
+<br>
+
+<div style="width: 300px; height: 200px; background-color: #EFEFEF" class="map_canvas">
+</div>
+
+<br>
+
+<div class="details">
+
+  <fieldset>
+
+      <label>Viewport</label>
+      <input name="viewport" type="text" value="">
+
+      <label>Route</label>
+      <input name="route" type="text" value="">
+
+      <label>Street Number</label>
+      <input name="street_number" type="text" value="22222">
+
+      <label>Postal Code</label>
+      <input name="postal_code" type="text" value="">
+
+      <label>Locality</label>
+      <input name="locality" type="text" value="">
+
+      <label>Sub Locality</label>
+      <input name="sublocality" type="text" value="">
+
+      <label>Country</label>
+      <input name="country" geo-data="country" type="text" value="">
+
+      <label>State</label>
+      <input name="administrative_area_level_1" type="text" value="">
+
+  </fieldset>
+
+</div>
+
+
+<input id="find" type="button" class="span4" value="GoNow"><br>
+<input id="updateButton" type="button" class="span4" value="Update">
+</form>
+<br>
+
 <div class='remove'>[remove]</div>
